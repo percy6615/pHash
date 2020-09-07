@@ -1,0 +1,3 @@
+phash.py
+
+將Hash找出的相同圖片剔除至phashphoto資料夾內，並將亮度過白的圖片視為文件，並剔除至white資料夾內
