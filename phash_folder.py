@@ -87,7 +87,7 @@ def phashCodeFile(localPathName='train'):
     filenames = []
     filesAllPath = []
     trainPath = basedirs + '\\' + localPathName
-    phashcodeFile = basedirs + '\\' + 'phashcode.txt'
+    phashcodeFile = basedirs + '\\' + 'phashcode'+"_"+localPathName+'.txt'
     for root, dirs, files in os.walk(trainPath):
         for file in files:
             fileSplit = os.path.splitext(file)
@@ -101,7 +101,7 @@ def phashCodeFile(localPathName='train'):
     fout.truncate(0)
     countitem = 0
     countcorrect = 0
-    writePath = basedirs + '\\' + "white"
+    writePath = basedirs + '\\' + "white_"+localPathName
     if not os.path.isdir(writePath):
         os.mkdir(writePath)
     for fileAllPath in filesAllPath:
@@ -123,18 +123,18 @@ def phashCodeFile(localPathName='train'):
     print("correct:%s" % countcorrect)
     print('non-except' + str(countcorrect / countitem))
     fout.close()
-    return phashcodeFile
+    return phashcodeFile, localPathName
 
 
-def phashProcess():
+def phashProcess(localPathName='train'):
     fileNames = []
     file16hexCode = []
     file2bitCode = []
     filesAllPath = []
     phashInfomations = []
-    phashcodePath = basedirs + "\\" + 'phashcode.txt'
-    phash16errorPath = basedirs + "\\" + '16biterror.txt'
-    phashhammingdistancePath = basedirs + "\\" + 'phashcode_hamming_distance.txt'
+    phashcodePath = basedirs + "\\" + 'phashcode'+"_"+localPathName+'txt'
+    phash16errorPath = basedirs + "\\" + '16biterror'+"_"+localPathName+'txt'
+    phashhammingdistancePath = basedirs + "\\" + 'phashcode_hamming_distance'+"_"+localPathName+'txt'
     fphashcodefile = open(phashcodePath, 'r')
     # 變數 lines 會儲存 filename.txt 的內容
     lines = fphashcodefile.readlines()
@@ -143,12 +143,12 @@ def phashProcess():
 
     f16biterrorfile = open(phash16errorPath, 'w')
     f16biterrorfile.truncate(0)
-    error16bit = basedirs + '\\' + "error16bit"
+    error16bit = basedirs + '\\' + "error16bit_"+localPathName
     if not os.path.isdir(error16bit):
         os.mkdir(error16bit)
     fhammingdisfile = open(phashhammingdistancePath, 'w')
     fhammingdisfile.truncate(0)
-    photophash = basedirs + '\\' + "phashphoto"
+    photophash = basedirs + '\\' + "phashphoto_"+localPathName
     if not os.path.isdir(photophash):
         os.mkdir(photophash)
     # print content
@@ -186,5 +186,5 @@ def phashProcess():
             im1 = Image.open(phashInfomations[j].getfileAllPath())
             im1.save(photophash+"\\"+phashInfomations[j].getfilename())
             os.remove(phashInfomations[j].getfileAllPath())
-phashCodeFile()
-phashProcess()
+phashcodeFile, localPathName = phashCodeFile()
+phashProcess(localPathName)
