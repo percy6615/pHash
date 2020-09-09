@@ -72,9 +72,9 @@ if __name__ == '__main__':
         else:
             print(ppp[count - 1])
             f16biterror.write(ppp[count - 1] + '\n')
-            im16biterror = cv2.imread(ppp[count - 1])
-            cv2.imwrite('C:\\untitled\\16bitError\\' + x[count - 1], im16biterror)
-            os.remove(ppp[count - 1])
+            # im16biterror = cv2.imread(ppp[count - 1])
+            # cv2.imwrite('C:\\untitled\\16bitError\\' + x[count - 1], im16biterror)
+            # os.remove(ppp[count - 1])
 
     f16biterror.close()
 
